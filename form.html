@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myapp" ng-controller="myctrl">
+        <form ng-submit="submit()">
+            <input type="text" ng-model="user.name">
+            <input type="password" ng-model="user.password">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        var app = angular.module("myapp", []);
+        app.controller("myctrl", function ($scope, $http) {
+            $scope.user = {};
+            $scope.submit = function () {
+                $http.post("http://localhost:3000/registration/", $scope.user).then((res) => {
+                    console.log(res.data);
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

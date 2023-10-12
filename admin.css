@@ -1,0 +1,163 @@
+.product-card {
+	width: 300px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	position: relative;
+	margin: 2rem;
+	transition: transform 0.5s;
+	animation: fadeIn 1s ease-in-out;
+  }
+ 
+  @keyframes fadeIn {
+	0% {
+	  opacity: 0;
+	  transform: translateY(20px);
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  }
+  
+  @keyframes scaleIn {
+	0% {
+	  transform: scale(0.8);
+	}
+	100% {
+	  transform: scale(1);
+	}
+  }
+  .product-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Set the width to 75% of the parent element */
+    height: 25%; /* Cover the full height of the parent element */
+    background-color: rgba(197, 190, 190, 0.5); /* Change this to the desired background color */
+    z-index: -1; /* Place the pseudo-element behind the content */
+}
+
+.product-image {
+	position: relative;
+	overflow: hidden;
+	border-radius: 50%; /* Make the image container circular */
+	width: 150px; /* Set a fixed width for the circular image container */
+	height: 150px; /* Set a fixed height for the circular image container */
+	margin: 0 auto; 
+    border-top:15px solid white;
+    border-left:15px solid white;
+    border-bottom:15px solid rgb(133, 133, 218);
+    border-right:15px solid rgb(133, 133, 218);/*
+     Center the circular image container */
+}
+
+.product-image img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover; /* Maintain aspect ratio while covering the circular container */
+	transition: transform 0.3s;
+}
+.top {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    padding: 10px;
+    color: white;
+  }
+  
+  .top p {
+    margin: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .top p:hover {
+    background-color: #555;
+  }
+  
+  /* You can add icons using an icon library like Font Awesome */
+  .top p::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f111"; /* Adjust the content based on the desired icon */
+    margin-right: 5px;
+  }
+/* Rest of your existing code */
+
+.product-card:hover .product-overlay {
+	opacity: 1;
+}
+.product-image:hover .product-overlay {
+	opacity: 1;
+}
+
+  .product-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	opacity: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.3s;
+  }
+  .button{
+    background-color: #faf4f4;
+    border: none;
+  }
+  .swiper {
+    width: 1500px;
+    height: 700px;
+  }
+  .product-overlay-link {
+	color: #fff;
+	font-size: 18px;
+	text-decoration: none;
+	padding: 10px 20px;
+	background-color: #4CAF50;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+  }
+  
+  .product-overlay-link:hover {
+	background-color: #45a049;
+  }
+  
+  .product-card:hover .product-overlay{
+	opacity: 1;
+  }
+  .product-image:hover .product-overlay {
+	opacity: 1;
+  }
+  
+  .product-details {
+	padding: 20px;
+  }
+  span{
+    font-size: 10px;
+  }
+  .product-title {
+	font-size: 18px;
+	margin-top: 0;
+    text-align: center;
+  }
+  
+  .product-description {
+	font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .product-price {
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 10px;
+  }
+  

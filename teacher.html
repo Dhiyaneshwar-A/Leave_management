@@ -1,0 +1,105 @@
+=<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .upload-form {
+            display: none;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+
+        .upload-form input[type="file"] {
+            margin: 5px 0;
+        }
+
+        .upload-form input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .upload-form input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body ng-app="myapp" ng-controller="myctrl" >
+    <header>
+        <h1>Student's Courses</h1>
+    </header>
+
+    <div class="container" ng-repeat="x in list">
+        <ul>
+            <li onclick="toggleUploadForm('')">Course:{{x.subject}}</li>
+            <div id="course1-upload" class="upload-form">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file">
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
+            
+
+            <!-- Add more courses and upload forms here -->
+        </ul>
+    </div>
+
+    <script>
+        function toggleUploadForm(courseId) {
+            const uploadForm = document.getElementById(courseId + '-upload');
+            if (uploadForm.style.display === "none") {
+                uploadForm.style.display = "block";
+            } else {
+                uploadForm.style.display = "none";
+            }
+        }
+        var app=angular.module("myapp",[]);
+        app.controller("myctrl",function($scope){
+            $scope.list=[{"subject":"english"},{"subject":"tamil"},{"subject":"Maths"},{"subject":"Science"}];
+        });
+    </script>
+</body>
+</html>

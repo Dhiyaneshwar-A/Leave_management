@@ -1,0 +1,311 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+
+  nav {
+    background-color: #333;
+    padding: 10px;
+  }
+
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  background-color: #f0f0f0;
+}
+
+#search {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+}
+
+#search-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#search-button:hover {
+  background-color: #0056b3;
+}
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+  
+  .leave-form {
+    width: 350px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-image: url("path/to/background-image.jpg");
+  background-size: cover;
+  background-position: center;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  #leave-form-container {
+    margin-top: 20px;
+  }
+  
+  .form-field {
+    margin-bottom: 15px;
+  }
+  
+  .form-field label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+  }
+  
+  .form-field input[type="date"],
+  .form-field textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .form-field input[type="date"]:focus,
+  .form-field textarea:focus {
+    border-color: #007bff;
+  }
+  
+  #submit-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  #submit-btn:hover {
+    background-color: #0056b3;
+    animation: pulse 0.5s infinite alternate;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+  .leave-history-container {
+    margin: 20px;
+  }
+
+  .leave-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .leave-history-table thead th {
+    background-color: #4CAF50;
+    color: #fff;
+    text-align: left;
+    padding: 12px;
+  }
+
+  .leave-history-table tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .leave-history-table tbody tr {
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .leave-history-table tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  .leave-history-table tbody tr:hover td {
+    color: #333;
+  }
+
+  .leave-history-table tbody tr:hover {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .dashboard-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  /* Style for the headings */
+  .dashboard-container h1 {
+    color: #4CAF50;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .dashboard-container h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 5px;
+  }
+
+  /* Style for the lists */
+  .dashboard-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dashboard-container ul li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  /* Animation for list items */
+  .dashboard-container ul li {
+    
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Applying the animation on hover for better user experience */
+  .dashboard-container ul li:hover {
+    background-color: #f2f2f2;
+  }
+
+  .dashboard-container ul li:hover {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .card-leave-card {
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the card */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+
+    margin-top:50px;
+  }
+  
+  /* Custom styling for input text boxes */
+  .form-field input[type="text"],
+  .form-field input[type="date"],
+  .form-field textarea {
+    border: none;
+    border-bottom: 1px solid #ccc; /* Display as a line */
+    background-color: transparent; /* To make background transparent */
+    width: 100%;
+  }
+
+  select.form-control {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+  }
+ /* Add this CSS to your stylesheet */
+.card {
+  border: 1px solid #dcdcdc; /* Add border to the card */
+  border-radius: 8px; /* Add rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+  margin: 20px; /* Add some spacing around the card */
+  padding: 20px; /* Add padding inside the card */
+}
+
+.card-header {
+  border-bottom: 1px solid #dcdcdc; /* Add border at the bottom of the card header */
+   margin-bottom: 20px; /* Add spacing below the card header */
+}
+
+.form-field {
+  margin-bottom: 15px; /* Add spacing between form fields */
+}
+
+.form-control {
+  border: none; /* Remove border from form controls */
+  border-bottom: 1px solid #dcdcdc; /* Add a line-style border at the bottom */
+  border-radius: 0; /* Remove border radius */
+  padding: 8px 0; /* Add vertical padding */
+  width: 100%; /* Make the form controls take full width */
+  box-shadow: none; /* Remove any box shadow */
+}
+
+.btn {
+  padding: 5px 15px; /* Adjust button padding */
+  font-size: 14px; /* Adjust font size */
+  cursor: pointer;
+  display: inline-block;
+}
+.form-field-group {
+  display: flex;
+  gap: 10x; /* Adjust the gap between input fields as needed */
+  
+}
+.form-field{
+  padding: 5px;
+}
+.text-center {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.leaveType{
+  border: none; /* Remove border from form controls */
+  border-bottom: 1px solid #dcdcdc; /* Add a line-style border at the bottom */
+}

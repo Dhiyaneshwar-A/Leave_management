@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="leave_history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div ng-app="myapp" ng-controller="myctrl">
+        <div class="dashboard" >
+            <div class="card" ng-repeat="x in list_data|filter:{hod:'!approved'}">
+                <div class="left-panel">
+                <h2 class="card-title">{{x.count}}</h2>
+                <p class="card-content">{{x.content}}</p>
+                </div>
+            <div class="divider"></div>
+            <div class="right-panel">
+                <i class="fa-solid fa-school"></i>
+            </div>
+            </div>
+        </div>
+        <br>
+        <div ng-show="show">
+            <ng-dir1></ng-dir1>
+        </div>
+        <div ng-show="reject">
+            <ng-dir2></ng-dir2>
+        </div>
+        <br>
+        <div class="top">
+            <p style="background-color:grey">Pending</p>
+            <p ng-click="trig()">Approved</p>
+            <p ng-click="trigr()">Reject</p>
+        </div>
+
+        <div class="swiper">
+            <div class="swiper-wrapper">
+
+        <div class="product-card" ng-repeat="list in list_main|filter:{hod:'not approved'}">
+            <br>
+            <div class="product-image">
+            <img ng-src="photo1.png"></img>
+            <div class="product-overlay">
+                  <a href="#" class="product-overlay-link">View Details</a>
+                </div>
+            </div>
+                    <div class="product-details">		
+                        <h4 class="product-title"><b>{{list.username}}</b>
+                                </h4>
+                                <p style="font-weight:600">Request Details</p>
+                                <span>From date</span>
+                                <p class="product-description">{{list.startdate|date :  "dd.MM.y"}}</p>
+                                <span>To date</span>
+                                <p class="product-description">{{list.enddate|date :  "dd.MM.y"}}</p>
+                                <span>No of days</span>
+                                <p class="product-description">{{list.days}}</p>
+                                <span>Leave Reason</span>
+                                <p class="product-description">{{list.reason}}</p>
+                        </div>
+                        <button ng-click="add($index)" class="button" style="color:blue;border:2px solid blue;margin-left:20px"><i class="fa-solid fa-check"></i>Accept</button>
+                        <button ng-click="remove()" class="button" style="color:red;border:2px solid red;margin-left:120px"><i class="fa-regular fa-circle-xmark"></i>Reject</button>
+                        </div>	
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                  
+                    <!-- If we need scrollbar -->
+                    <div class="swiper-scrollbar"></div>
+                    </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+                <script>
+                    var app=angular.module('myapp',[]);
+                    app.controller("myctrl",function($scope,$http){
+                        $http.get("http://localhost:3000/fetch")
+                        .then(function(response) {
+                          $scope.list_main=response.data;
+                          console.log($scope.list_main);
+                        })
+                        .catch(function(error) {
+                          console.error(error); // Handle errors
+                        });
+                        $scope.show=false;
+                        $scope.list_data=[
+            {"content":"All Applied Leave","count":3},
+            {"content":"Approved","count":0},
+            {"content":"Pending","count":3},
+            {"content":"Rejected","count":0}
+            ];
+            $scope.add=function(a){
+                $scope.list_data[1].count=$scope.list_data[1].count+1;  
+                $scope.list_main[a].hod="approved";       
+                console.log($scope.list_main[a].username);
+                console.log($scope.list_main[a]);       
+                $http.put("http://localhost:3000/update/"+$scope.list_main[a].username,{hod:"approved"}).then(
+                    function(res){
+                        console.log(res);
+                    }
+                ).catch((err)=>{
+                    console.log(err);
+                })
+                $scope.list_main.splice(a,1);
+            }
+            $scope.remove=function(){
+                $scope.list_data[3].count=$scope.list_data[3].count+1;
+            }
+            $scope.trig=function(){
+                $scope.show=true;
+            }
+            $scope.trigr=function(){
+                $scope.reject=true;
+            }
+                    });
+                    app.directive("ngDir2",function(){
+                        return{
+                            restrict:"E",
+                            template:"<table><tr><th>Leave Type</th><th>Date From</th><th>Date To</th><th>No of Days  <i style='margin-left:5px' ng-click='sort()' class='fa-solid fa-sort-up'></i></th><th>HOD status</th><th>Tutor Status</th><th>Action</th></tr><tr ng-repeat='x in list_r'><td>{{x.leavetype}}</td><td>{{x.startdate}}</td><td>{{x.enddate}}</td><td>{{x.days}}</td><td><span style='color:blue'>{{x.hod}}</span></td><td><span>{{x.tutor}}</span></td><td><i ng-click='remove($index)' style='color:red' class='fas fa-trash-alt'></i></td></tr></table>",
+                            controller:"reject"
+
+                        }
+                    });
+                    app.controller("reject",function($scope){
+                        $scope.list_r =list_r;
+            $scope.sort=function(){
+                $scope.list_r.sort(function(a, b) {
+                    return a.days - b.days;
+                    
+                });
+                
+            }
+            $scope.remove = function($index) {
+                $scope.list_r.splice($index, 1);
+            };
+                
+                    });
+                    var list_r=[{"type":"OD","from":"2023/07/29","to":"2023/09/23","days":2,"hod":"Pending","tutor":"Reject"},
+                
+                {"type":"OD","from":"2023/07/29","to":"2023/09/23","days":2,"hod":"Pending","tutor":"Reject"}]
+            var list_a= [
+            {"type":"OD","from":"2023/07/29","to":"2023/09/23","days":2,"hod":"Pending","tutor":"Approved"},
+            
+            {"type":"OD","from":"2023/07/29","to":"2023/09/23","days":2,"hod":"Pending","tutor":"Approved"}
+        ];
+                    app.directive("ngDir1",function(){
+                        return{
+                            restrict:"E",
+                            template:"<table><tr><th>Leave Type</th><th>Date From</th><th>Date To</th><th>No of Days  <i style='margin-left:5px' ng-click='sort()' class='fa-solid fa-sort-up'></i></th><th>HOD status</th><th>Tutor Status</th><th>Action</th></tr><tr ng-repeat='x in list_a'><td>{{x.type}}</td><td>{{x.from}}</td><td>{{x.to}}</td><td>{{x.days}}</td><td><span style='color:blue'>{{x.hod}}</span></td><td><span>{{x.tutor}}</span></td><td><i ng-click='remove($index)' style='color:red' class='fas fa-trash-alt'></i></td></tr></table>",
+                            controller:"history"
+                        }
+                    });
+                    app.controller("history",function($scope){
+                      $scope.list_a=list_a;  
+            $scope.sort=function(){
+                $scope.list_a.sort(function(a, b) {
+                    return a.days - b.days;
+                    
+                });
+                
+            }
+            $scope.remove = function($index) {
+                $scope.list_a.splice($index, 1);
+            };
+                    });
+                    const swiper = new Swiper('.swiper', {
+                        direction: 'horizontal',
+                        loop: true,
+                        pagination: {
+                            el: '.swiper-pagination',
+                        },
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        scrollbar: {
+                            el: '.swiper-scrollbar',
+                        },
+                    });
+                </script>
+
+</body>
+</html>

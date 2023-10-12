@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="leave.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+</head>
+<body ng-app="myapp" ng-controller="myctrl">
+    <div class="card-leave-card">
+        <div class="card-header">
+            <h1 class="card-title text-center" style="font-size: 24px;">Apply for Leave</h1>
+        </div>
+        <span ng-show="form.name.$error.required">Name is required</span>
+        <span ng-show="form.name.$error.minlength">Input is too short</span>
+        <span ng-show="form.name.$error.maxlength">Input is too long</span>
+        <div class="card-body">
+            <form id="leave-form-container" ng-submit="submitLeave()" name="form">
+                <div class="form-field">
+                    <label for="startDate" style="font-size: 16px;">Enter your Name:</label>
+                    <input type="text" name="name" id="startDate" ng-model="user.username" required ng-minlength="user.name.min" ng-maxlength="user.name.max" ng-required="user.name.required">
+                </div>
+                <div class="form-field">
+                    <label for="leaveType" style="font-size: 16px;">Leave Type:</label>
+                    <select id="leaveType" ng-model="user.leavetype" required>
+                        <option value="sick">ONDUTY</option>
+                        <option value="vacation">MEDICAL LEAVE</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="startDate" style="font-size: 16px;">Start Date:</label>
+                    <input type="date" id="startDate" ng-model="user.startdate" required>
+                </div>
+                <div class="form-field">
+                    <label for="endDate" style="font-size: 16px;">End Date:</label>
+                    <input type="date" id="endDate" ng-model="user.enddate" required>
+                </div>
+                <div class="form-field">
+                    <label for="startDate" style="font-size: 16px;">Enter no of days:</label>
+                    <input type="text" name="days" id="startDate" ng-model="user.days">
+                </div>
+                <div class="form-field">
+                    <label for="reason" style="font-size: 16px;">Reason:</label>
+                    <textarea id="reason" ng-model="user.reason" rows="4" style="border: 1px solid #ccc;" required></textarea>
+                </div>
+                <button type="submit" id="submit-btn" class="btn btn-primary btn-sm" style="font-size: 16px;">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        var app=angular.module("myapp",[]);
+        app.controller('myctrl', function ($scope,$http) {
+            $scope.user = {};
+            
+            $scope.submitLeave = function () {
+                alert("Details is submitted");
+                $http.post("http://localhost:3000/registration/", $scope.user).then((res) => {
+                    console.log(res.data);
+                }).catch((err) => {
+                    console.log(err);
+                });
+            };
+            $scope.user={name:{min:5,max:10,required:true}};
+          });
+    </script>
+</body>
+</html>
